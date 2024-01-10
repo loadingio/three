@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+  body
+    div(ld="root")
+    +script([
+      {name: "proxise"},
+      {name: "@loadingio/debounce.js"},
+      {name: "@loadingio/ldquery"},
+      {name: "ldview"},
+      {name: "ldcover"},
+      {name: "@plotdb/semver"},
+      {name: "@plotdb/rescope"},
+      {name: "@plotdb/csscope"},
+      {name: "@plotdb/block"},
+      {url: "/assets/lib/three/main/index.min.js"}
+    ])
+    script(type="module"): include:lsc index.ls

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+rm -rf dist
+mkdir -p dist .built
+echo "compile livescripts ..."
+
+./node_modules/.bin/lsc -cbp src/THREE.ls > .built/THREE.js
+./node_modules/.bin/rollup --config cfg/THREE.js
+cat .built/THREE.bundle.js > dist/index.js
+
+for name in SVGLoader OrbitControls EffectComposer ShaderPass RenderPass CopyShader ConvolutionShader FilmShader BloomPass FilmPass; do
+  ./node_modules/.bin/lsc src/generator.ls $name
+  ./node_modules/.bin/lsc -cbp .built/$name.ls > .built/$name.js
+  ./node_modules/.bin/rollup --config .built/$name.rollup.config.js
+  cat .built/$name.bundle.js >> dist/index.js
+done
+
+./node_modules/.bin/lsc -cbp src/anikit.ls > .built/anikit.js
+cat .built/anikit.js >> dist/index.js
+
+uglifyjs dist/index.js -c > dist/index.min.js
+rm web/static/assets/lib/three/main
+rm -rf .built
+mkdir -p web/static/assets/lib/three/
+ln -s ../../../../../dist web/static/assets/lib/three/main

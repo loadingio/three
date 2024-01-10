@@ -1,0 +1,59 @@
+{
+  "name": "@loadingio/three",
+  "version": "0.0.0",
+  "description": "three.js bundler for loading.io",
+  "main": "dist/index.min.js",
+  "browser": "dist/index.min.js",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "start": "npx server -r web -o true"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "zbryikt",
+  "license": "MIT",
+  "dependencies": {
+    "@loadingio/bootstrap.ext": "^0.0.11",
+    "@loadingio/debounce.js": "^1.0.1",
+    "@loadingio/ldquery": "^3.0.5",
+    "@plotdb/block": "^5.2.5",
+    "@plotdb/csscope": "^5.0.3",
+    "@plotdb/rescope": "^5.0.11",
+    "@plotdb/semver": "^0.0.3",
+    "@zbryikt/template": "^2.3.45",
+    "bootstrap": "^4.6.1",
+    "fedep": "^1.1.11",
+    "ldcover": "^3.5.3",
+    "ldiconfont": "^0.2.6",
+    "ldloader": "^3.0.3",
+    "ldview": "^1.4.0",
+    "proxise": "^1.0.1",
+    "rollup": "^4.9.4"
+  },
+  "frontendDependencies": {
+    "root": "web/static/assets/lib",
+    "modules": [
+      "@loadingio/bootstrap.ext",
+      "@loadingio/debounce.js",
+      "@loadingio/ldquery",
+      "@plotdb/block",
+      "@plotdb/csscope",
+      "@plotdb/rescope",
+      "@plotdb/semver",
+      "bootstrap",
+      "ldcover",
+      "ldiconfont",
+      "ldloader",
+      "ldview",
+      "proxise"
+    ]
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "livescript": "^1.6.0",
+    "rollup-plugin-import-map": "^3.0.0",
+    "template-text": "^0.1.3"
+  }
+}
