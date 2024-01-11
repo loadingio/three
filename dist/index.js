@@ -6657,11 +6657,19 @@ anikitThreeRenderer = function(kit, node, t, opt){
   if (!values) {
     return;
   }
-  ref$ = ['x', 'y', 'z'].map(function(it){
-    return bbox.max[it] - bbox.min[it];
-  }).map(function(d, i){
-    return (opt.origin || values.transformOrigin || [0, 0, 0])[i] * d / 2;
-  }), wx = ref$[0], wy = ref$[1], wz = ref$[2];
+  if (kit.preset) {
+    ref$ = ['x', 'y', 'z'].map(function(it){
+      return bbox.max[it] - bbox.min[it];
+    }).map(function(d, i){
+      return (opt.origin || values.transformOrigin || [0, 0, 0])[i] * d;
+    }), wx = ref$[0], wy = ref$[1], wz = ref$[2];
+  } else {
+    ref$ = ['x', 'y', 'z'].map(function(it){
+      return bbox.max[it] - bbox.min[it];
+    }).map(function(d, i){
+      return ((opt.origin || values.transformOrigin || [0.5, 0.5, 0.5])[i] - 0.5) * d / 2;
+    }), wx = ref$[0], wy = ref$[1], wz = ref$[2];
+  }
   ref$ = ['x', 'y', 'z'].map(function(it){
     return (bbox.max[it] + bbox.min[it]) * 0.5;
   }), nx = ref$[0], ny = ref$[1], nz = ref$[2];
@@ -6680,7 +6688,7 @@ anikitThreeRenderer = function(kit, node, t, opt){
   node.matrixAutoUpdate = false;
   mat = values.transform || [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
   [3, 7, 11].map(function(it){
-    return mat[it] = mat[it] / 40;
+    return mat[it] = mat[it] / 1;
   });
   gmat = new THREE.Matrix4().makeTranslation(wx, wy, wz);
   node.matrix.set.apply(node.matrix, mat);

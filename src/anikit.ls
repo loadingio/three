@@ -15,10 +15,16 @@ anikit-three-renderer = (kit, node, t, opt = {}) ->
     t = t - Math.floor(t)
     values = kit.step t, {width: w, height: h}, \affine
   if !values => return
-
-  [wx,wy,wz] = <[x y z]>
-    .map -> bbox.max[it] - bbox.min[it]
-    .map (d,i) -> ((opt.origin or values.transform-origin or [0, 0, 0])[i]) * d / 2
+  if kit.preset =>
+    # v1
+    [wx,wy,wz] = <[x y z]>
+      .map -> bbox.max[it] - bbox.min[it]
+      .map (d,i) -> ((opt.origin or values.transform-origin or [0, 0, 0])[i]) * d
+  else
+    # v0. TODO test if this works correctly
+    [wx,wy,wz] = <[x y z]>
+      .map -> bbox.max[it] - bbox.min[it]
+      .map (d,i) -> ((opt.origin or values.transform-origin or [0.5, 0.5, 0.5])[i] - 0.5) * d / 2
   [nx,ny,nz] = <[x y z]>
     .map -> (bbox.max[it] + bbox.min[it]) * 0.5
 
@@ -31,7 +37,7 @@ anikit-three-renderer = (kit, node, t, opt = {}) ->
 
   node.matrixAutoUpdate = false
   mat = values.transform or [1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1]
-  [3,7,11].map -> mat[it] = mat[it] / 40 #TODO make to real ratio
+  [3,7,11].map -> mat[it] = mat[it] / 1 #TODO make to real ratio
 
   gmat = new THREE.Matrix4!makeTranslation wx, wy, wz
   node.matrix.set.apply( node.matrix, mat)
