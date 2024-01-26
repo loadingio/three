@@ -29,8 +29,7 @@
     "ldiconfont": "^0.2.6",
     "ldloader": "^3.0.3",
     "ldview": "^1.4.0",
-    "proxise": "^1.0.1",
-    "rollup": "^4.9.4"
+    "proxise": "^1.0.1"
   },
   "frontendDependencies": {
     "root": "web/static/assets/lib",
@@ -51,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "rollup": "^4.9.4",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "livescript": "^1.6.0",
     "rollup-plugin-import-map": "^3.0.0",
