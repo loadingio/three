@@ -12,7 +12,9 @@ anikit-three-renderer = (kit, node, t, opt = {}) ->
   if kit.preset =>
     w = (bbox.max.x - bbox.min.x)
     h = (bbox.max.y - bbox.min.y)
-    t = t - Math.floor(t)
+    # we should always pass real time to step for determine the correct loop count.
+    # if we need to limit t between 0 and 1:
+    #     if t != 1 => t = t - Math.floor(t)
     values = kit.step t, {width: w, height: h}, \affine
   if !values => return
   if kit.preset =>

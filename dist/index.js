@@ -6648,7 +6648,6 @@ anikitThreeRenderer = function(kit, node, t, opt){
   if (kit.preset) {
     w = bbox.max.x - bbox.min.x;
     h = bbox.max.y - bbox.min.y;
-    t = t - Math.floor(t);
     values = kit.step(t, {
       width: w,
       height: h
