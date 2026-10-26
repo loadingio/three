@@ -1,6 +1,6 @@
 {
   "name": "@loadingio/three",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "three.js bundler for loading.io",
   "main": "dist/index.min.js",
   "browser": "dist/index.min.js",
@@ -8,7 +8,8 @@
     "dist/**/*"
   ],
   "scripts": {
-    "start": "npx server -r web -o true"
+    "start": "npx server -r web -o true",
+    "test": "lsc test/anikit.ls"
   },
   "type": "module",
   "keywords": [],

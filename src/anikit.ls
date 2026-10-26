@@ -41,10 +41,15 @@ anikit-three-renderer = (kit, node, t, opt = {}) ->
   mat = values.transform or [1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1]
   [3,7,11].map -> mat[it] = mat[it] / 1 #TODO make to real ratio
 
-  gmat = new THREE.Matrix4!makeTranslation wx, wy, wz
   node.matrix.set.apply( node.matrix, mat)
-  node.matrix.multiply gmat
-  node.matrix.premultiply(if gmat.invert => gmat.invert! else gmat.getInverse gmat)
+  # anikit 2+ ( anikit.major >= 2 ) 的 step affine 矩陣已展開 origin ( box 中心為原點, y 向上 ), 不需再套 G.
+  # 1.x 則維持 G^-1 * M * G ( 剛好抵銷 1.x affine 展開 origin 的方向錯誤 ).
+  # 註: 2.x 的 preset 路徑不支援 opt.origin ( 會被忽略 ); 要改 origin 應在 kit 層處理.
+  major = if anikit? => anikit.major or 1 else 1
+  if !(kit.preset and major >= 2) =>
+    gmat = new THREE.Matrix4!makeTranslation wx, wy, wz
+    node.matrix.multiply gmat
+    node.matrix.premultiply(if gmat.invert => gmat.invert! else gmat.getInverse gmat)
   if node.repos => node.matrix.premultiply node.repos
 
   opacity = if values.opacity? => values.opacity else 1
