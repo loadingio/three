@@ -25,7 +25,7 @@
     "@plotdb/semver": "^0.0.3",
     "@zbryikt/template": "^2.3.45",
     "bootstrap": "^4.6.1",
-    "fedep": "^1.1.11",
+    "fedep": "^1.9.0",
     "ldcover": "^3.5.3",
     "ldiconfont": "^0.2.6",
     "ldloader": "^3.0.3",
@@ -51,9 +51,9 @@
     ]
   },
   "devDependencies": {
-    "rollup": "^4.9.4",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "livescript": "^1.6.0",
+    "rollup": "^4.9.4",
     "rollup-plugin-import-map": "^3.0.0",
     "template-text": "^0.1.3"
   }
